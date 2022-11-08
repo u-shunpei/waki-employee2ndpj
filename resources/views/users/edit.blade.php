@@ -36,7 +36,11 @@
             <div class="form-group">
                 <label>誕生日</label><br>
                 <select name="birth_name" class="" id="">
-                    <option value="{{ $user->birth->id }}">{{ $user->birth->name }}</option>
+                    @if(is_null($user->birth_id))
+                        <option value="">選択してください</option>
+                    @else
+                        <option value="{{ $user->birth->id }}">{{ $user->birth->name }}</option>
+                    @endif
                     @foreach($births as $birth)
                         <option value="{{ $birth->id }}" name="birth_name">
                             {{ $birth->name }}
@@ -45,7 +49,11 @@
                 </select>
                 <span>月</span>
                 <select name="birthday_name" class="" id="">
-                    <option value="{{ $user->birthday->id }}">{{ $user->birthday->name }}</option>
+                    @if(is_null($user->birthday_id))
+                        <option value="">選択してください</option>
+                    @else
+                        <option value="{{ $user->birthday->id }}">{{ $user->birthday->name }}</option>
+                    @endif
                     @foreach($birthdays as $birthday)
                         <option value="{{ $birthday->id }}" name="birthday_name">
                             {{ $birthday->name }}
@@ -57,7 +65,11 @@
             <div class="form-group">
                 <label>役職</label><br>
                 <select name="position_name" class="" id="">
-                    <option value="{{ $user->position->id }}">{{ $user->position->name }}</option>
+                    @if(is_null($user->position_id))
+                        <option value="">選択してください</option>
+                    @else
+                        <option value="{{ $user->position->id }}">{{ $user->position->name }}</option>
+                    @endif
                     @foreach($positions as $position)
                         <option value="{{ $position->id }}" name="position_name">
                             {{ $position->name }}
@@ -68,7 +80,12 @@
             <div class="form-group">
                 <label>部署</label><br>
                 <select name="department_name" class="" id="">
-                    <option value="{{ $user->department->id }}">{{ $user->department->name }}</option>
+                    @if(is_null($user->department_id))
+                        <option value="">選択してください</option>
+                    @else
+                        <option value="{{ $user->department->id }}">{{ $user->department->name }}</option>
+                    @endif
+
                     @foreach($departments as $department)
                         <option value="{{ $department->id }}" name="department_name">
                             {{ $department->name }}
@@ -79,7 +96,12 @@
             <div class="form-group">
                 <label>課</label><br>
                 <select name="division_name" class="" id="">
-                    <option value="{{ $user->division->id }}">{{ $user->division->name }}</option>
+                    @if(is_null($user->division_id))
+                        <option value="">選択してください</option>
+                    @else
+                        <option value="{{ $user->division->id }}">{{ $user->division->name }}</option>
+                    @endif
+
                     @foreach($divisions as $division)
                         <option value="{{ $division->id }}" name="division_name">
                             {{ $division->name }}

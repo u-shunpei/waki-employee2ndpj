@@ -37,6 +37,7 @@ class HomeController extends Controller
             return 'エラー';
         }
 
+
         return view('detail', compact('user'));
     }
 }

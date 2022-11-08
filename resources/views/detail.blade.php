@@ -29,7 +29,12 @@
         <div class="ttl">
             <p class="name">{{ $user->name }}</p>
             <p class="nickname">{{ $user->nickname }}</p>
-            <p class="birthday">{{ $user->birth->name }}月{{ $user->birthday->name }}日</p>
+            @if(is_null($user->birth_id))
+                <p class="birthday"></p>
+            @else
+                <p class="birthday">{{ $user->birth->name }}月{{ $user->birthday->name }}日</p>
+            @endif
+
         </div>
     </div>
     <table class="profile">
@@ -39,15 +44,27 @@
         </tr>
         <tr>
             <th>役職</th>
-            <td>{{ $user->position->name }}</td>
+            @if(is_null($user->position_id))
+                <td></td>
+            @else
+                <td>{{ $user->position->name }}</td>
+            @endif
         </tr>
         <tr>
             <th>部署</th>
-            <td>{{ $user->department->name }}</td>
+            @if(is_null($user->department_id))
+                <td></td>
+            @else
+                <td>{{ $user->department->name }}</td>
+            @endif
         </tr>
         <tr>
             <th>課</th>
-            <td>{{ $user->division->name }}</td>
+            @if(is_null($user->division_id))
+                <td></td>
+            @else
+                <td>{{ $user->division->name }}</td>
+            @endif
         </tr>
         <tr>
             <th>やりたい仕事（ワキに限らず）</th>
