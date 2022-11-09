@@ -24,7 +24,8 @@
             <div class="card">
                 <a href="{{ route('showDetail', $user->id) }}" style="text-decoration: none">
                     <div class="card__img">
-                        <img src="{{ '/storage/images' . $user->img_name }}" alt="">
+{{--                        <img src="{{ '/storage/images' . $user->img_name }}" alt="">--}}
+                        <img src="/storage/images/{{$user -> img_name}}">
                     </div>
                     <div class="card__content">
                         <div class="card__content-cat">{{ $user->name }}</div>

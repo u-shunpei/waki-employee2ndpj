@@ -5,24 +5,30 @@
         <div class="tab">
             <ul class="tab-menu">
                 <li class="tab-menu__item active">
-                    <img src="{{ '/storage/images' . $user->img_name }}" alt="">
+{{--                    <img src="{{ '/storage/images' . $user->img_name }}" alt="">--}}
+                    <img src="/storage/images/{{$user -> img_name}}">
                 </li>
                 <li class="tab-menu__item">
-                    <img src="{{ '/storage/images' . $user->img_name }}" alt="">
+{{--                    <img src="{{ '/storage/images' . $user->img_name }}" alt="">--}}
+                    <img src="/storage/images/{{$user -> img_name}}">
                 </li>
                 <li class="tab-menu__item">
-                    <img src="{{ '/storage/images' . $user->img_name }}" alt="">
+{{--                    <img src="{{ '/storage/images' . $user->img_name }}" alt="">--}}
+                    <img src="/storage/images/{{$user -> img_name}}">
                 </li>
             </ul>
             <div class="tab-content">
                 <div class="tab-content__item show">
-                    <img src="{{ '/storage/images' . $user->img_name }}" alt="">
+{{--                    <img src="{{ '/storage/images' . $user->img_name }}" alt="">--}}
+                    <img src="/storage/images/{{$user -> img_name}}">
                 </div>
                 <div class="tab-content__item">
-                    <img src="{{ '/storage/images' . $user->img_name }}" alt="">
+{{--                    <img src="{{ '/storage/images' . $user->img_name2 }}" alt="">--}}
+                    <img src="/storage/images/{{$user -> img_name}}">
                 </div>
                 <div class="tab-content__item">
-                    <img src="{{ '/storage/images' . $user->img_name }}" alt="">
+{{--                    <img src="{{ '/storage/images' . $user->img_name }}" alt="">--}}
+                    <img src="/storage/images/{{$user -> img_name}}">
                 </div>
             </div>
         </div>
