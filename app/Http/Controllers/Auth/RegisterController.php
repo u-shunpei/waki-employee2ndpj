@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\ProfileRequest;
 use App\Providers\RouteServiceProvider;
 use App\Models\User;
 use Illuminate\Foundation\Auth\RegistersUsers;
@@ -70,18 +71,24 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
+        $users = User::all();
 
-        $imageFile = $data['img_name'];
+        if (!is_null($data['img_name'])){
+            $imageFile = $data['img_name'];
 
-        $list = FileUploadServices::fileUpload($imageFile); //変更
+            $list = FileUploadServices::fileUpload($imageFile); //変更
 
-        list($extension, $fileNameToStore, $fileData) = $list; //変更
+            list($extension, $fileNameToStore, $fileData) = $list; //変更
 
-        $data_url = CheckExtensionServices::checkExtension($fileData, $extension);
+            $data_url = CheckExtensionServices::checkExtension($fileData, $extension);
 
-        $image = Image::make($data_url);
+            $image = Image::make($data_url);
 
-        $image->resize(400, 400)->save(storage_path() . '\app\public\images' . $fileNameToStore);
+            $image->resize(400, 400)->save(storage_path() . '\app\public\images\ ' . $fileNameToStore);
+
+            $users->img_name = $imageFile;
+        }
+
 
         return User::create([
             'name' => $data['name'],

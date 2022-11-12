@@ -21,6 +21,5 @@ class FileUploadServices
         return $list;
 
     }
-
 }
 

@@ -15,18 +15,16 @@
     </span>
             @enderror
 
-{{--            <label for="file_photo" class="rounded-circle userProfileImg">--}}
-{{--                <div class="userProfileImg_description">画像をアップロード</div>--}}
-{{--                <i class="fas fa-camera fa-3x"></i>--}}
-{{--                <input type="file" id="file_photo" name="img_name">--}}
+            <label for="file_photo" class="rounded-circle userProfileImg">
+                <div class="userProfileImg_description">画像をアップロード</div>
+                <i class="fas fa-camera fa-3x"></i>
+                <input type="file" id="file_photo" name="img_name">
 
-{{--            </label>--}}
-{{--            <div class="userImgPreview" id="userImgPreview">--}}
-{{--                <img id="thumbnail" class="userImgPreview_content" accept="image/*" src="">--}}
-{{--                <p class="userImgPreview_text">画像をアップロード済み</p>--}}
-{{--            </div>--}}
-
-            <input type="file" id="file_photo" name="img_name[]" multiple>
+            </label>
+            <div class="userImgPreview" id="userImgPreview">
+                <img id="thumbnail" class="userImgPreview_content" accept="image/*" src="">
+                <p class="userImgPreview_text">画像をアップロード済み</p>
+            </div>
 
 {{--            <label for="file_photo" class="rounded-circle userProfileImg">--}}
 {{--                <div class="userProfileImg_description">画像をアップロード</div>--}}

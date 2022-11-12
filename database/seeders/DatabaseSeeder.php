@@ -13,7 +13,7 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        // \App\Models\User::factory(10)->create();
+
         $this->call([
             BirthdaysTableSeeder::class,
             BirthsTableSeeder::class,
@@ -21,5 +21,6 @@ class DatabaseSeeder extends Seeder
             DivisionsTableSeeder::class,
             PositionsTableSeeder::class,
         ]);
+        \App\Models\User::factory(10)->create();
     }
 }

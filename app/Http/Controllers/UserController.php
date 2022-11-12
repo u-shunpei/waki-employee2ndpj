@@ -13,6 +13,7 @@ use Illuminate\Http\Request;
 use App\Services\FileUploadServices;
 use App\Services\CheckExtensionServices;
 use Intervention\Image\Facades\Image;
+use function Sodium\compare;
 
 class UserController extends Controller
 {
@@ -47,7 +48,7 @@ class UserController extends Controller
 
             $data_url = CheckExtensionServices::checkExtension($fileData, $extension);
             $image = Image::make($data_url);
-            $image->resize(400,400)->save(storage_path() . '/app/public/images/' . $fileNameToStore );
+            $image->resize(400,400)->save(storage_path() . '\app\public\images\ ' . $fileNameToStore );
 
             $users->img_name = $fileNameToStore;
         }

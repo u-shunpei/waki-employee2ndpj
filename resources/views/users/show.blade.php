@@ -13,7 +13,8 @@
             </header>
             <div class='userInfo'>
                 <div class='userInfo_img'>
-                    <img src="/storage/images/{{$user -> img_name}}">
+                    <img src="{{ '\storage\images\ ' . $user->img_name }}" alt="">
+{{--                    <img src="/storage/images/{{$user -> img_name}}">--}}
                 </div>
                 <div class='userInfo_name'>{{ $user -> name }}</div>
                 <div class='userInfo_selfIntroduction'>{{ $user -> self_introduction }}</div>
