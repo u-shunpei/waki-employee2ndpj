@@ -27,4 +27,5 @@ Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Route::get('/detail/{user_id}', [\App\Http\Controllers\HomeController::class, 'showDetail'])->name('showDetail');
+Route::post('/home', [\App\Http\Controllers\HomeController::class, 'search'])->name('search');
 

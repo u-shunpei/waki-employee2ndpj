@@ -21,6 +21,6 @@ class DatabaseSeeder extends Seeder
             DivisionsTableSeeder::class,
             PositionsTableSeeder::class,
         ]);
-        \App\Models\User::factory(10)->create();
+//        \App\Models\User::factory(10)->create();
     }
 }

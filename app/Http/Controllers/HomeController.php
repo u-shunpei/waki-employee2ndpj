@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Department;
+use App\Models\Division;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -25,9 +27,10 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $users = User::all();
+        $users = User::Paginate(4);
+        $auth = Auth::user();
 
-        return view('home', compact('users'));
+        return view('home', compact('users', 'auth'));
     }
 
     public function showDetail($user_id)
@@ -36,8 +39,19 @@ class HomeController extends Controller
         if (is_null($user)) {
             return 'エラー';
         }
+        $auth = Auth::user();
 
 
-        return view('detail', compact('user'));
+        return view('detail', compact('user', 'auth'));
+    }
+
+    public function search(Request $request)
+    {
+        $user = User::Pagenate(4);
+        $users = User::searchShops($request->department_id, $request->division_id, $request->name);
+//        $departments = Department::all();
+//        $divisions = Division::all();
+        $auth = Auth::user();
+        return view('home', compact('users','auth', 'user'));
     }
 }

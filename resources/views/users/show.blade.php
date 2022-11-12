@@ -1,23 +1,33 @@
 @extends('layouts.layout')
 
 @section('content')
-
+    <header class="navbar navbar-expand-xl navbar-light bg-light">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#">株式会社ワキプリントピア</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarBasic"
+                    aria-controls="navbarBasic" aria-expanded="true" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="navbar-collapse collapse show" id="navbarBasic" style="">
+                <ul class="navbar-nav me-auto mb-2 mb-xl-0">
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="#">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Link</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </header>
     <div class='usershowPage'>
         <div class='container'>
-            <header class="header">
-                <p class='header_logo'>
-                    <a href="{{ route('home') }}">
-                        <img src="/storage/images/techpit-match-icon.png">
-                    </a>
-                </p>
-            </header>
             <div class='userInfo'>
                 <div class='userInfo_img'>
                     <img src="{{ '\storage\images\ ' . $user->img_name }}" alt="">
 {{--                    <img src="/storage/images/{{$user -> img_name}}">--}}
                 </div>
                 <div class='userInfo_name'>{{ $user -> name }}</div>
-                <div class='userInfo_selfIntroduction'>{{ $user -> self_introduction }}</div>
             </div>
 
             <div class='userAction'>

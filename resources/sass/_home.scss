@@ -1,9 +1,25 @@
+.container {
+    width: 100%;
+}
+
 .flex__card {
-    width: 80%;
+    width: 90%;
     display: flex;
     justify-content: space-around;
     flex-wrap: wrap;
     margin: 0 auto;
+}
+
+.flex__card::before{
+    content:"";
+    display: block;
+    width:38%;
+    order:1;
+}
+.flex__card::after{
+    content:"";
+    display: block;
+    width:38%;
 }
 
 .card {
@@ -54,5 +70,9 @@
     /* 横並びにするためにinline-blockを指定 */
     margin-left: 20px;
     color: #888888;
+}
+
+.nav-item {
+    white-space: nowrap;
 }
 

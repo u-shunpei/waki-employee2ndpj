@@ -46,6 +46,8 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
+
+    //リレーション
     public function birth()
     {
         return $this->belongsTo('App\Models\Birth');
@@ -69,5 +71,35 @@ class User extends Authenticatable
     public function position()
     {
         return $this->belongsTo('App\Models\Position');
+    }
+
+    //検索機能
+    public static function searchShops($department_id, $division_id, $keyword)
+    {
+        $query = User::query();
+
+        if (!empty($department_id)) {
+            $query->whereHas('department', function ($query) use ($department_id) {
+                $query->where('id', $department_id);
+            });
+        } else {
+            $query->with('department');
+        }
+
+        if (!empty($division_id)) {
+            $query->whereHas('division', function ($query) use ($division_id) {
+                $query->where('id', $division_id);
+            });
+        } else {
+            $query->with('division');
+        }
+
+        if (!empty($keyword)) {
+            $query->where('name', 'like', "%$keyword%");
+        }
+
+        $users = $query->get();
+
+        return $users;
     }
 }
