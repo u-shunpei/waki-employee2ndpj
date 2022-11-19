@@ -16,16 +16,18 @@ use App\Http\Controllers\UserController;
 Route::group(['prefix' => 'users', 'middleware' => 'auth'], function () {
     Route::get('show/{id}', [UserController::class, 'show'])->name('users.show');
     Route::get('edit/{id}', [UserController::class, 'edit'])->name('users.edit');
-    Route::post('update/{id}', [UserController::class, 'update'])->name('users.update');
+    Route::post('show/{id}', [UserController::class, 'update'])->name('update');
 });
 
-Route::get('/', function () {
-    return view('top');
-});
+
+
+//Route::get('/', function () {
+//    return view('top');
+//});
 
 Auth::routes();
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Route::get('/detail/{user_id}', [\App\Http\Controllers\HomeController::class, 'showDetail'])->name('showDetail');
-Route::post('/home', [\App\Http\Controllers\HomeController::class, 'search'])->name('search');
+Route::post('/', [\App\Http\Controllers\HomeController::class, 'search'])->name('search');
 

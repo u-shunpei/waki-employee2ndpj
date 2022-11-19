@@ -71,6 +71,7 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
+
         $users = User::all();
 
         if (!is_null($data['img_name'])){
@@ -84,7 +85,7 @@ class RegisterController extends Controller
 
             $image = Image::make($data_url);
 
-            $image->resize(400, 400)->save(storage_path() . '\app\public\images\ ' . $fileNameToStore);
+            $image->resize(110, 110)->save(storage_path() . '\app\public\images\ ' . $fileNameToStore);
 
             $users->img_name = $imageFile;
         }

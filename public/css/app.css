@@ -21395,83 +21395,16 @@ form {
   opacity: 0.6;
 }
 
-.container {
-  width: 100%;
-}
-
-.flex__card {
-  width: 90%;
-  display: flex;
-  justify-content: space-around;
-  flex-wrap: wrap;
-  margin: 0 auto;
-}
-
-.flex__card::before {
-  content: "";
-  display: block;
-  width: 38%;
-  order: 1;
-}
-
-.flex__card::after {
-  content: "";
-  display: block;
-  width: 38%;
-}
-
 .card {
-  width: 250px;
-  margin: 100px auto 0;
+  width: 90%;
+  height: 50px;
+  margin: 0 auto;
   box-shadow: 0px 3px 10px rgba(0, 0, 0, 0.2);
 }
 
-.card__img img {
-  width: 100%;
-}
-
-.card__content {
-  padding: 15px 25px;
-}
-
-.card__content-ttl {
-  font-size: 18px;
-  margin-bottom: 30px;
-  font-weight: 400;
-  color: black;
-}
-
-.card__content-cat {
-  padding: 5px 10px;
-  background: #008888;
-  margin-bottom: 15px;
-  display: inline-block;
-  /* 要素の文字数に応じて幅が変更されるためにinline-blockを指定 */
-  color: #fff;
-  font-size: 14px;
-}
-
-.card__content-tag {
-  font-size: 14px;
-  text-align: right;
-  /* 親要素にtext-alignを適用すると子要素のinline-block要素に適応される */
-}
-
-.card__content-tag-item {
-  display: inline-block;
-  /* 横並びにするためにinline-blockを指定 */
-  color: #008888;
-}
-
-.card__content-tag-item--last {
-  display: inline-block;
-  /* 横並びにするためにinline-blockを指定 */
-  margin-left: 20px;
-  color: #888888;
-}
-
-.nav-item {
-  white-space: nowrap;
+.img img {
+  width: 75px;
+  height: 50px;
 }
 
 .flex__ttl {
@@ -21497,7 +21430,6 @@ form {
 
 .tab-content__item {
   display: none;
-  font-size: 40px;
   margin: 0 0 0 30px;
 }
 
@@ -21506,9 +21438,9 @@ form {
 }
 
 .tab-menu__item img {
-  width: 100px;
+  width: 50px;
 }
 
 .tab-content__item img {
-  height: 300px;
+  height: 150px;
 }

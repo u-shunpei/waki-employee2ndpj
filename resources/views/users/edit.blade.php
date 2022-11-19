@@ -6,7 +6,7 @@
             <div>プロフィールを編集</div>
         </header>
 
-        <form class="form mt-5" method="POST" action="/users/update/{{ $user->id }}" enctype="multipart/form-data">
+        <form class="form mt-5" method="POST" action="{{ route('update', $user->id) }}" enctype="multipart/form-data">
             @csrf
 
             @error('email')
@@ -159,7 +159,6 @@
                 <button type="submit" class="btn submitBtn">変更する</button>
             </div>
         </form>
-    </div>
     </div>
 @endsection
 

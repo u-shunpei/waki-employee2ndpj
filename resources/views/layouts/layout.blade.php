@@ -13,7 +13,7 @@
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 </head>
-<body style="width: 100%;">
+<body style="width: 100%; height: 100vh">
 
 @yield('content')
 

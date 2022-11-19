@@ -27,7 +27,7 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $users = User::Paginate(4);
+        $users = User::all();
         $auth = Auth::user();
 
         return view('home', compact('users', 'auth'));
@@ -35,23 +35,21 @@ class HomeController extends Controller
 
     public function showDetail($user_id)
     {
-        $user = User::findorFail($user_id);
-        if (is_null($user)) {
+        $users = User::all();
+        $person = User::findorFail($user_id);
+        if (is_null($person)) {
             return 'エラー';
         }
         $auth = Auth::user();
 
 
-        return view('detail', compact('user', 'auth'));
+        return view('detail', compact('person', 'auth', 'users'));
     }
 
     public function search(Request $request)
     {
-        $user = User::Pagenate(4);
         $users = User::searchShops($request->department_id, $request->division_id, $request->name);
-//        $departments = Department::all();
-//        $divisions = Division::all();
         $auth = Auth::user();
-        return view('home', compact('users','auth', 'user'));
+        return view('home', compact('users','auth'));
     }
 }

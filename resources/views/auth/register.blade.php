@@ -75,34 +75,39 @@
 
     <div class="form-wrapper">
         <h1>Sign Up</h1>
-        <form class="form-control" method="post" action="{{ route('register') }}">
+        <form class="form-control" method="post" action="{{ route('register') }}" enctype="multipart/form-data">
             @csrf
             <label for="file_photo" class="rounded-circle userProfileImg">
                 <div class="userProfileImg_description">画像をアップロード</div>
                 <i class="fas fa-camera fa-3x"></i>
                 <input type="file" id="file_photo" name="img_name">
-
             </label>
-            <div class="userImgPreview" id="userImgPreview">
-                <img id="thumbnail" class="userImgPreview_content" accept="image/*" src="">
-                <p class="userImgPreview_text">画像をアップロード済み</p>
+            <div class="form-item">
+                <input type="text" name="name" required="required" placeholder="User Name" autofocus>
             </div>
             <div class="form-item">
-                <label for="email"></label>
-                <input type="email" name="email" required="required" placeholder="Email Address" autofocus></input>
+                <input type="email" name="email" required="required" placeholder="Email Address">
             </div>
             <div class="form-item">
-                <label for="password"></label>
-                <input type="password" name="password" required="required" placeholder="Password"></input>
+                <input type="password" name="password" required="required" placeholder="Password">
+            </div>
+            <div class="form-item">
+                <input type="password" name="password_confirmation" required="required"
+                       placeholder="Password Confirmation">
+            </div>
+            <div class="form-item @error('self_introduction')has-error @enderror">
+                <input type="text" name="self_introduction" required="required"
+                       placeholder="self introduction">
+                @error('self_introduction')--}}
+                <span class="errorMessage">
+                            {{ $message }}
+                          </span>
+                @enderror
             </div>
             <div class="button-panel">
-                <input type="submit" class="button" title="Sign In" value="Sign In"></input>
+                <input type="submit" class="button" title="Sign In" value="Sign Up">
             </div>
         </form>
-        <div class="form-footer">
-            <p><a href="{{ route('register') }}">Create an account</a></p>
-            <p><a href="#">Forgot password?</a></p>
-        </div>
     </div>
 @endsection
 

@@ -39,6 +39,7 @@ class UserController extends Controller
     public function update($id, ProfileRequest $request)
     {
         $users = User::findorFail($id);
+        $user = User::findorFail($id);
 
         if(!is_null($request['img_name'])){
             $imageFile = $request['img_name'];
@@ -48,7 +49,7 @@ class UserController extends Controller
 
             $data_url = CheckExtensionServices::checkExtension($fileData, $extension);
             $image = Image::make($data_url);
-            $image->resize(400,400)->save(storage_path() . '\app\public\images\ ' . $fileNameToStore );
+            $image->resize(1000,1000)->save(storage_path() . '\app\public\images\ ' . $fileNameToStore );
 
             $users->img_name = $fileNameToStore;
         }
@@ -72,6 +73,6 @@ class UserController extends Controller
 
 
 
-        return redirect('home');
+        return view('users.show', compact('user'));
     }
 }
