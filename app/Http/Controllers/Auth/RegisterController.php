@@ -59,7 +59,7 @@ class RegisterController extends Controller
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
             'self_introduction' => ['string', 'max:255'],
-            'img_name' => ['file', 'image', 'mimes:jpeg,png,jpg,gif', 'max:2000'], //この行を追加します
+            'img_name' => ['file', 'image', 'mimes:jpeg,png,jpg,gif,jfif', 'max:2000'], //この行を追加します
         ]);
     }
 

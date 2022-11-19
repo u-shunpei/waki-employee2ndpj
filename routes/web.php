@@ -27,7 +27,7 @@ Route::group(['prefix' => 'users', 'middleware' => 'auth'], function () {
 
 Auth::routes();
 
-Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-Route::get('/detail/{user_id}', [\App\Http\Controllers\HomeController::class, 'showDetail'])->name('showDetail');
-Route::post('/', [\App\Http\Controllers\HomeController::class, 'search'])->name('search');
+Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->middleware('auth')->name('home');
+Route::get('/detail/{user_id}', [\App\Http\Controllers\HomeController::class, 'showDetail'])->middleware('auth')->name('showDetail');
+Route::post('/', [\App\Http\Controllers\HomeController::class, 'search'])->middleware('auth')->name('search');
 

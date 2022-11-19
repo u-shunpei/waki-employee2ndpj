@@ -25,6 +25,10 @@ class CheckExtensionServices
             $data_url = 'data:image/gif;base64,'. base64_encode($fileData);
         }
 
+        if ($extension === 'jfif'){
+            $data_url = 'data:image/jfif;base64,'. base64_encode($fileData);
+        }
+
         return $data_url;
     }
 }
