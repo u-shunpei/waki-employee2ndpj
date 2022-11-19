@@ -200,8 +200,8 @@
             @endforeach
         </div>
         <div class="detail w-50 bg-white container shadow">
-            <div class="row-cols-2 d-flex mb-3">
-                <div class="w-25 mt-4">
+            <div class="d-flex justify-content-start mb-3">
+                <div class="mt-4 w-50">
                     <div class="tab">
 {{--                        <ul class="tab-menu">--}}
 {{--                            <li class="tab-menu__item active">--}}
@@ -255,7 +255,7 @@
                 </div>
             </div>
             <div class="row">
-                <div class="col-sm">
+                <div class="">
                     <table class="table table-striped">
                         <tr>
                             <th>自己紹介</th>
