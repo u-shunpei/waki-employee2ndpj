@@ -45,8 +45,22 @@ class HomeController extends Controller
         }
         $auth = Auth::user();
 
+        // セッション値「count」の存在確認
+        if(session()->has('count')){
+            // あり
+            $count = session('count');
+        }else{
+            // なし
+            $count = 0;
+        }
 
-        return view('detail', compact('person', 'auth', 'users'));
+        // カウントを１つまわす
+        $count++;
+        // 値を保存
+        session(['count' => "$count"]);
+
+
+        return view('detail', compact('person', 'auth', 'users', 'count'));
     }
 
     public function search(Request $request)

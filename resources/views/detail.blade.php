@@ -185,8 +185,12 @@
                         </div>
                     </div>
                 </div>
-                <div class="mt-5">
+                <div class="mt-3">
                     <table class="table table-striped">
+                        <tr>
+                            <th>アクセス数</th>
+                            <td>{{ $count }}</td>
+                        </tr>
                         <tr>
                             <th>名前</th>
                             <td>{{ $person->name }}</td>
