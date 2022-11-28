@@ -3,24 +3,41 @@
 @section('content')
     <div class="w-75 m-auto">
         <h1 class="h2 align-content-start w-25">ユーザ登録</h1>
-        <form action="" method="POST">
+        <form action="{{route('userCreate')}}" method="POST" enctype="multipart/form-data">
             @csrf
             <table class="table">
                 <tr>
-                    <th>ID</th>
-                    <td></td>
+                    <th>画像</th>
+                    <td>
+                        <label for="file_photo" class="rounded-circle userProfileImg">
+                            <input type="file" id="file_photo" name="img_name">
+                        </label>
+                    </td>
                 </tr>
                 <tr>
                     <th>name</th>
-                    <td><input type="text" class="w-100" name="name" value=""/></td>
+                    <td><input type="text" class="w-100" name="name" required autofocus/></td>
                 </tr>
                 <tr>
                     <th>email</th>
-                    <td><input type="email" class="w-100" name="email" value=""/></td>
+                    <td><input type="email" class="w-100" name="email" required/></td>
+                </tr>
+                <tr>
+                    <th>password</th>
+                    <td><input type="password" class="w-100" name="password" required/></td>
                 </tr>
                 <tr>
                     <th>kind</th>
-                    <td><input type="number" class="w-100" name="kind_id" value=""/></td>
+                    <td>
+                        <select name="kind_id" class="w-100" id="">
+                            <option value="">選択してください</option>
+                            @foreach($kinds as $kind)
+                                <option value="{{ $kind->id }}" name="kind_id">
+                                    {{ $kind->name }}
+                                </option>
+                            @endforeach
+                        </select>
+                    </td>
                 </tr>
             </table>
             <button type="submit" class="btn border bg-primary">

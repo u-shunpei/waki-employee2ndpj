@@ -2,9 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Kind;
 use App\Models\User;
+use App\Services\CheckExtensionServices;
+use App\Services\FileUploadServices;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
+use Intervention\Image\Facades\Image;
 
 class OwnerController extends Controller
 {
@@ -28,8 +33,41 @@ class OwnerController extends Controller
     {
         $auth = Auth::user();
         $user = User::all();
+        $kinds = Kind::all();
 
-        return view('owner.userCreate', compact('auth', 'user'));
+        return view('owner.userCreate', compact('auth', 'user', 'kinds'));
+    }
+
+    public function create(Request $request)
+    {
+        $auth = Auth::user();
+        $users = User::all();
+
+        if (!is_null($request['img_name'])){
+            $imageFile = $request['img_name'];
+
+            $list = FileUploadServices::fileUpload($imageFile); //変更
+
+            list($extension, $fileNameToStore, $fileData) = $list; //変更
+
+            $data_url = CheckExtensionServices::checkExtension($fileData, $extension);
+
+            $image = Image::make($data_url);
+
+            $image->resize(110, 110)->save(storage_path() . '\app\public\images\ ' . $fileNameToStore);
+
+            $users->img_name = $imageFile;
+        }
+
+        User::create([
+            'img_name' => $fileNameToStore,
+            'name' => $request['name'],
+            'email' => $request['email'],
+            'password' => Hash::make($request['password']),
+            'kind_id' => $request['kind_id'],
+        ]);
+
+        return view('owner.userCreateSuccess', compact('auth'));
     }
 
     public function showUserEdit($user_id)
