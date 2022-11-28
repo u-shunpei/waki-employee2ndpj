@@ -8,8 +8,11 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
+
+
 class HomeController extends Controller
 {
+    const STATUS_KIND_ID_OWNER = 1;
     /**
      * Create a new controller instance.
      *

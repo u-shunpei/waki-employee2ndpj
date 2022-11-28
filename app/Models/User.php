@@ -23,6 +23,7 @@ class User extends Authenticatable
         'password',
         'self_introduction',
         'img_name',
+        'kind_id',
 //        'img_name2',
 //        'img_name3',
     ];
@@ -71,6 +72,11 @@ class User extends Authenticatable
     public function position()
     {
         return $this->belongsTo('App\Models\Position');
+    }
+
+    public function kind()
+    {
+        return $this->belongsTo('App\Models\Kind');
     }
 
     //検索機能

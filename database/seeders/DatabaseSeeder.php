@@ -20,6 +20,7 @@ class DatabaseSeeder extends Seeder
             DepartmentsTableSeeder::class,
             DivisionsTableSeeder::class,
             PositionsTableSeeder::class,
+            KindsTableSeeder::class,
         ]);
 //        \App\Models\User::factory(10)->create();
     }

@@ -16,6 +16,8 @@ use App\Services\FileUploadServices;
 
 class RegisterController extends Controller
 {
+    const STATUS_KIND_ID_OWNER = 1;
+    const STATUS_KIND_ID_USER = 2;
     /*
     |--------------------------------------------------------------------------
     | Register Controller
@@ -71,7 +73,6 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-
         $users = User::all();
 
         if (!is_null($data['img_name'])){
@@ -97,6 +98,7 @@ class RegisterController extends Controller
             'password' => Hash::make($data['password']),
             'self_introduction' => $data['self_introduction'],
             'img_name' => $fileNameToStore,
+            'kind_id' => $data['kind_id'],
         ]);
     }
 }

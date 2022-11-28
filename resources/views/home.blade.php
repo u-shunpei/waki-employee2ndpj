@@ -1,54 +1,6 @@
-@extends('layouts.layout')
+@extends('layouts.default')
 
 @section('content')
-    <header class="navbar navbar-expand-xl navbar-light bg-light mb-3 shadow">
-        <div class="container-fluid">
-            <a class="navbar-brand" href="/">株式会社ワキプリントピア</a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarBasic"
-                    aria-controls="navbarBasic" aria-expanded="true" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="navbar-collapse collapse show" id="navbarBasic" style="">
-                <ul class="navbar-nav me-auto mb-2 mb-xl-0">
-                    <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="/">Home</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Link</a>
-                    </li>
-                    <li class="nav-item">
-                        <div class="dropdown">
-                            <button class="btn secondary dropdown-toggle" type="button" id="dropdownMenuButton1"
-                                    data-bs-toggle="dropdown" aria-expanded="false">
-                                {{ $auth->name }}
-                            </button>
-                            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                                <li><a class="dropdown-item"
-                                       href="{{route('users.show', ['id' => auth()->user()->id])}}"><span>自分のプロフィールへ</span></a>
-                                </li>
-                                <li>
-                                    <div class='userAction_logout userAction_common'>
-                                        <a href="{{ route('logout') }}" class="dropdown-item"
-                                           onclick="event.preventDefault();document.getElementById('logout-form').submit();"><span>ログアウト</span></a>
-                                        <form id="logout-form" action="{{ route('logout') }}" method="POST"
-                                              style="display: none;">
-                                            {{ csrf_field() }}
-                                        </form>
-                                    </div>
-                                </li>
-                            </ul>
-                        </div>
-                    </li>
-                </ul>
-                <form action="/" method="post" class="d-flex">
-                    @csrf
-                    <input class="form-control me-2" type="search" name="name" placeholder="Search"
-                           aria-label="Search">
-                    <button class="btn btn-outline-success" type="submit">Search</button>
-                </form>
-            </div>
-        </div>
-    </header>
     <article class="d-flex">
         <div class="side w-25 bg-light shadow">
             <div class="d-flex flex-row " style="height: calc(100% - 50px)">
@@ -60,9 +12,9 @@
                         <button class="btn" type="submit">ALL</button>
                     </form>
                     <div class="dropdown">
+                        <span>　生産調達本部</span>
                         <button class="btn secondary dropdown-toggle" type="submit" id="dropdownMenuButton1"
                                 data-bs-toggle="dropdown" aria-expanded="false">
-                            生産調達本部
                         </button>
                         <ul class="dropdown-menu b-2" aria-labelledby="dropdownMenu2">
                             <li>

@@ -2,6 +2,8 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\OwnerController;
+use App\Http\Controllers\HomeController;
 
 /*
 |--------------------------------------------------------------------------
@@ -19,6 +21,16 @@ Route::group(['prefix' => 'users', 'middleware' => 'auth'], function () {
     Route::post('show/{id}', [UserController::class, 'update'])->name('update');
 });
 
+Route::prefix('owner/users')->middleware('AdminMiddleware')->group( function () {
+    Route::get('/list', [OwnerController::class, 'showUserList'])->name('showUserList');
+    Route::get('/detail/{user_id}', [OwnerController::class, 'showUserDetail'])->name('showUserDetail');
+    Route::get('/create', [OwnerController::class, 'showUserCreate'])->name('showUserCreate');
+    Route::post('/create/success', [OwnerController::class, 'create'])->name('userCreate');
+    Route::get('/edit/{user_id}', [OwnerController::class, 'showUserEdit'])->name('showUserEdit');
+    Route::post('/edit/success/{user_id}', [OwnerController::class, 'edit'])->name('userEdit');
+    Route::post('/delete/Success/{user_id}', [OwnerController::class, 'delete'])->name('userDelete');
+});
+
 
 
 //Route::get('/', function () {
@@ -27,7 +39,7 @@ Route::group(['prefix' => 'users', 'middleware' => 'auth'], function () {
 
 Auth::routes();
 
-Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->middleware('auth')->name('home');
-Route::get('/detail/{user_id}', [\App\Http\Controllers\HomeController::class, 'showDetail'])->middleware('auth')->name('showDetail');
-Route::post('/', [\App\Http\Controllers\HomeController::class, 'search'])->middleware('auth')->name('search');
+Route::get('/', [HomeController::class, 'index'])->middleware('auth')->name('home');
+Route::get('/detail/{user_id}', [HomeController::class, 'showDetail'])->middleware('auth')->name('showDetail');
+Route::post('/', [HomeController::class, 'search'])->middleware('auth')->name('search');
 

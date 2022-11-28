@@ -104,6 +104,7 @@
                           </span>
                 @enderror
             </div>
+            <input type="hidden" name="kind_id" value="2" />
             <div class="button-panel">
                 <input type="submit" class="button" title="Sign In" value="Sign Up">
             </div>
