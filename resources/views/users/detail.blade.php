@@ -1,11 +1,11 @@
-@extends('layouts.default')
+@extends('layouts.employeeDefault')
 
 @section('content')
     <article class="d-flex">
         <div class="side w-25 bg-light shadow">
             <div class="d-flex flex-row " style="height: calc(100% - 50px)">
                 <nav>
-                    <form action="/" method="post">
+                    <form action="{{ route('employeeSearch') }}" method="post">
                         @csrf
                         <input class="form-control me-2" type="hidden" name="name" placeholder="Search"
                                aria-label="Search">
@@ -18,7 +18,7 @@
                         </button>
                         <ul class="dropdown-menu b-2" aria-labelledby="dropdownMenu2">
                             <li>
-                                <form action="/" method="post">
+                                <form action="{{ route('employeeSearch') }}" method="post">
                                     @csrf
                                     <button class="dropdown-item" type="submit">
                                         <input type="hidden" name="division_id" value="2">
@@ -27,7 +27,7 @@
                                 </form>
                             </li>
                             <li>
-                                <form action="/" method="post">
+                                <form action="{{ route('employeeSearch') }}" method="post">
                                     @csrf
                                     <button class="dropdown-item" type="submit">
                                         <input type="hidden" name="division_id" value="3">
@@ -36,7 +36,7 @@
                                 </form>
                             </li>
                             <li>
-                                <form action="/" method="post">
+                                <form action="{{ route('employeeSearch') }}" method="post">
                                     @csrf
                                     <button class="dropdown-item" type="submit">
                                         <input type="hidden" name="division_id" value="4">
@@ -53,7 +53,7 @@
                         </button>
                         <ul class="dropdown-menu b-2" aria-labelledby="dropdownMenu2">
                             <li>
-                                <form action="/" method="post">
+                                <form action="{{ route('employeeSearch') }}" method="post">
                                     @csrf
                                     <button class="dropdown-item" type="submit">
                                         <input type="hidden" name="division_id" value="5">
@@ -62,7 +62,7 @@
                                 </form>
                             </li>
                             <li>
-                                <form action="/" method="post">
+                                <form action="{{ route('employeeSearch') }}" method="post">
                                     @csrf
                                     <button class="dropdown-item" type="submit">
                                         <input type="hidden" name="division_id" value="6">
@@ -71,7 +71,7 @@
                                 </form>
                             </li>
                             <li>
-                                <form action="/" method="post">
+                                <form action="{{ route('employeeSearch') }}" method="post">
                                     @csrf
                                     <button class="dropdown-item" type="submit">
                                         <input type="hidden" name="division_id" value="7">
@@ -88,7 +88,7 @@
                         </button>
                         <ul class="dropdown-menu b-2" aria-labelledby="dropdownMenu2">
                             <li>
-                                <form action="/" method="post">
+                                <form action="{{ route('employeeSearch') }}" method="post">
                                     @csrf
                                     <button class="dropdown-item" type="submit">
                                         <input type="hidden" name="division_id" value="8">
@@ -97,7 +97,7 @@
                                 </form>
                             </li>
                             <li>
-                                <form action="/" method="post">
+                                <form action="{{ route('employeeSearch') }}" method="post">
                                     @csrf
                                     <button class="dropdown-item" type="submit">
                                         <input type="hidden" name="division_id" value="9">
@@ -114,7 +114,7 @@
                         </button>
                         <ul class="dropdown-menu b-2" aria-labelledby="dropdownMenu2">
                             <li>
-                                <form action="/" method="post">
+                                <form action="{{ route('employeeSearch') }}" method="post">
                                     @csrf
                                     <button class="dropdown-item" type="submit">
                                         <input type="hidden" name="division_id" value="10"/>
@@ -123,7 +123,7 @@
                                 </form>
                             </li>
                             <li>
-                                <form action="/" method="post">
+                                <form action="{{ route('employeeSearch') }}" method="post">
                                     @csrf
                                     <button class="dropdown-item" type="submit">
                                         <input type="hidden" name="division_id" value="11">
@@ -136,12 +136,14 @@
                 </nav>
             </div>
         </div>
-        <div class="list w-25 bg-light shadow">
+        <div class="w-25 bg-light shadow">
             @foreach($users as $user)
-                <a href="{{route('showDetail', $user->id)}}" class="card text-decoration-none text-black">
+                <a href="{{route('showEmployeeDetail', $user->id)}}"
+                   class="card text-decoration-none text-black d-block rounded-0" style="height: fit-content">
                     <div class="d-flex">
                         <div class="img">
-                            <img src="{{ '\storage\images\ ' . $user->img_name }}" alt="...">
+                            <img src="{{ '\storage\images\ ' . $user->img_name }}" alt="..." class="rounded-0"
+                                 style="height: 50px">
                         </div>
                         <div class="content">
                             <span>{{ $user->nickname }}</span><br>
@@ -152,45 +154,13 @@
             @endforeach
         </div>
         <div class="detail w-50 bg-white container shadow">
-            <div class="d-flex justify-content-start mb-3">
+            <div class="d-flex justify-content-center mb-3">
                 <div class="mt-4 w-50">
-                    <div class="tab">
-{{--                        <ul class="tab-menu">--}}
-{{--                            <li class="tab-menu__item active">--}}
-{{--                                <img src="{{ '\storage\images\ ' . $person->img_name }}" alt="">--}}
-{{--                                --}}{{--                            <img src="/storage/images/{{$user -> img_name}}">--}}
-{{--                            </li>--}}
-{{--                            <li class="tab-menu__item">--}}
-{{--                                <img src="{{ '\storage\images\ ' . $person->img_name }}" alt="">--}}
-{{--                                --}}{{--                            <img src="/storage/images/{{$user -> img_name}}">--}}
-{{--                            </li>--}}
-{{--                            <li class="tab-menu__item">--}}
-{{--                                <img src="{{ '\storage\images\ ' . $person->img_name }}" alt="">--}}
-{{--                                --}}{{--                            <img src="/storage/images/{{$user -> img_name}}">--}}
-{{--                            </li>--}}
-{{--                        </ul>--}}
-                        <div class="tab-content">
-                            <div class="tab-content__item show">
-                                <img src="{{ '\storage\images\ ' . $person->img_name }}" alt="">
-                                {{--                            <img src="/storage/images/{{$user -> img_name}}">--}}
-                            </div>
-                            <div class="tab-content__item">
-                                <img src="{{ '\storage\images\ ' . $person->img_name2 }}" alt="">
-                                {{--                            <img src="/storage/images/{{$user -> img_name}}">--}}
-                            </div>
-                            <div class="tab-content__item">
-                                <img src="{{ '\storage\images\ ' . $person->img_name }}" alt="">
-                                {{--                            <img src="/storage/images/{{$user -> img_name}}">--}}
-                            </div>
-                        </div>
-                    </div>
+                    <img src="{{ '\storage\images\ ' . $person->img_name }}" alt="">
+                    {{--                            <img src="/storage/images/{{$user -> img_name}}">--}}
                 </div>
                 <div class="mt-3">
                     <table class="table table-striped">
-                        <tr>
-                            <th>アクセス数</th>
-                            <td>{{ $count }}</td>
-                        </tr>
                         <tr>
                             <th>名前</th>
                             <td>{{ $person->name }}</td>
@@ -201,11 +171,7 @@
                         </tr>
                         <tr>
                             <th>誕生日</th>
-                            @if(is_null($person->birth_id))
-                                <td></td>
-                            @else
-                                <td>{{ $user->birth->name }}月{{ $person->birthday->name }}日</td>
-                            @endif
+                            <td>{{ $person->birthday }}</td>
                         </tr>
                     </table>
                 </div>

@@ -95,15 +95,6 @@
                 <input type="password" name="password_confirmation" required="required"
                        placeholder="Password Confirmation">
             </div>
-            <div class="form-item @error('self_introduction')has-error @enderror">
-                <input type="text" name="self_introduction" required="required"
-                       placeholder="self introduction">
-                @error('self_introduction')--}}
-                <span class="errorMessage">
-                            {{ $message }}
-                          </span>
-                @enderror
-            </div>
             <input type="hidden" name="kind_id" value="2" />
             <div class="button-panel">
                 <input type="submit" class="button" title="Sign In" value="Sign Up">

@@ -14,10 +14,6 @@ class AddColumnToUsersTable extends Migration
     public function up()
     {
         Schema::table('users', function (Blueprint $table) {
-            $table->unsignedBigInteger('birth_id')->nullable();
-            $table->foreign('birth_id')->references('id')->on('births');
-            $table->unsignedBigInteger('birthday_id')->nullable();
-            $table->foreign('birthday_id')->references('id')->on('birthdays');
             $table->unsignedBigInteger('position_id')->nullable();
             $table->foreign('position_id')->references('id')->on('positions');
             $table->unsignedBigInteger('department_id')->nullable();
@@ -26,6 +22,9 @@ class AddColumnToUsersTable extends Migration
             $table->foreign('division_id')->references('id')->on('divisions');
             $table->unsignedBigInteger('kind_id');
             $table->foreign('kind_id')->references('id')->on('kinds');
+            $table->unsignedBigInteger('gender_id')->nullable();
+            $table->foreign('gender_id')->references('id')->on('genders');
+            $table->date('birthday')->nullable();
         });
     }
 

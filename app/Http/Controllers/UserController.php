@@ -3,8 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\ProfileRequest;
-use App\Models\Birth;
-use App\Models\Birthday;
 use App\Models\Department;
 use App\Models\Division;
 use App\Models\Position;
@@ -12,34 +10,59 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use App\Services\FileUploadServices;
 use App\Services\CheckExtensionServices;
+use Illuminate\Support\Facades\Auth;
 use Intervention\Image\Facades\Image;
-use function Sodium\compare;
 
 class UserController extends Controller
 {
-    public function show($id)
+    public function redirect()
     {
-        $user = User::findorFail($id);
-
-        return view('users.show', compact('user'));
+        return redirect(route('showEmployeeList'));
     }
 
-    public function edit($id)
+    public function index()
     {
-        $user = User::findorFail($id);
-        $births = Birth::all();
-        $birthdays = Birthday::all();
+        $users = User::all();
+        $auth = Auth::user();
+
+        return view('users.list', compact('users', 'auth'));
+    }
+
+    public function showDetail($user_id)
+    {
+        $users = User::all();
+        $person = User::findorFail($user_id);
+        if (is_null($person)) {
+            return 'エラー';
+        }
+        $auth = Auth::user();
+
+        return view('users.detail', compact('person', 'auth', 'users'));
+    }
+
+    public function search(Request $request)
+    {
+        $users = User::searchShops($request->department_id, $request->division_id, $request->name);
+        $auth = Auth::user();
+        return view('users.list', compact('users','auth'));
+    }
+
+    public function edit($auth_id)
+    {
+        $auth = Auth::user();
+        $user = User::findorFail($auth_id);
         $positions = Position::all();
         $departments = Department::all();
         $divisions = Division::all();
 
-        return view('users.edit', compact('user', 'births', 'birthdays', 'positions', 'departments', 'divisions'));
+        return view('users.edit', compact('auth', 'user', 'positions', 'departments', 'divisions'));
     }
 
-    public function update($id, ProfileRequest $request)
+    public function update($auth_id, ProfileRequest $request)
     {
-        $users = User::findorFail($id);
-        $user = User::findorFail($id);
+        $users = User::findorFail($auth_id);
+        $user = User::findorFail($auth_id);
+        $auth = Auth::user();
 
         if(!is_null($request['img_name'])){
             $imageFile = $request['img_name'];
@@ -56,11 +79,7 @@ class UserController extends Controller
 
         $users->name = $request->name;
         $users->nickname = $request->nickname;
-        $users->birth_id = $request->birth_name;
-        $users->birthday_id = $request->birthday_name;
-        $users->position_id = $request->position_name;
-        $users->department_id = $request->department_name;
-        $users->division_id = $request->division_name;
+        $users->birthday = $request->birthday;
         $users->tel = $request->tel;
         $users->work = $request->work;
         $users->skill = $request->skill;
@@ -73,6 +92,6 @@ class UserController extends Controller
 
 
 
-        return view('users.show', compact('user'));
+        return view('users.editSuccess', compact('user', 'auth'));
     }
 }

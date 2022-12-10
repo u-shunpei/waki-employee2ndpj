@@ -60,7 +60,6 @@ class RegisterController extends Controller
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
-            'self_introduction' => ['string', 'max:255'],
             'img_name' => ['file', 'image', 'mimes:jpeg,png,jpg,gif,jfif', 'max:2000'], //この行を追加します
         ]);
     }
@@ -96,7 +95,6 @@ class RegisterController extends Controller
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
-            'self_introduction' => $data['self_introduction'],
             'img_name' => $fileNameToStore,
             'kind_id' => $data['kind_id'],
         ]);

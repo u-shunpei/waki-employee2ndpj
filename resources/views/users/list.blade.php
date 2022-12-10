@@ -1,11 +1,11 @@
-@extends('layouts.default')
+@extends('layouts.employeeDefault')
 
 @section('content')
     <article class="d-flex">
         <div class="side w-25 bg-light shadow">
             <div class="d-flex flex-row " style="height: calc(100% - 50px)">
                 <nav>
-                    <form action="/" method="post">
+                    <form action="{{ route('employeeSearch') }}" method="post">
                         @csrf
                         <input class="form-control me-2" type="hidden" name="name" placeholder="Search"
                                aria-label="Search">
@@ -18,7 +18,7 @@
                         </button>
                         <ul class="dropdown-menu b-2" aria-labelledby="dropdownMenu2">
                             <li>
-                                <form action="/" method="post">
+                                <form action="{{ route('employeeSearch') }}" method="post">
                                     @csrf
                                     <button class="dropdown-item" type="submit">
                                         <input type="hidden" name="division_id" value="2">
@@ -27,7 +27,7 @@
                                 </form>
                             </li>
                             <li>
-                                <form action="/" method="post">
+                                <form action="{{ route('employeeSearch') }}" method="post">
                                     @csrf
                                     <button class="dropdown-item" type="submit">
                                         <input type="hidden" name="division_id" value="3">
@@ -36,7 +36,7 @@
                                 </form>
                             </li>
                             <li>
-                                <form action="/" method="post">
+                                <form action="{{ route('employeeSearch') }}" method="post">
                                     @csrf
                                     <button class="dropdown-item" type="submit">
                                         <input type="hidden" name="division_id" value="4">
@@ -53,7 +53,7 @@
                         </button>
                         <ul class="dropdown-menu b-2" aria-labelledby="dropdownMenu2">
                             <li>
-                                <form action="/" method="post">
+                                <form action="{{ route('employeeSearch') }}" method="post">
                                     @csrf
                                     <button class="dropdown-item" type="submit">
                                         <input type="hidden" name="division_id" value="5">
@@ -62,7 +62,7 @@
                                 </form>
                             </li>
                             <li>
-                                <form action="/" method="post">
+                                <form action="{{ route('employeeSearch') }}" method="post">
                                     @csrf
                                     <button class="dropdown-item" type="submit">
                                         <input type="hidden" name="division_id" value="6">
@@ -71,7 +71,7 @@
                                 </form>
                             </li>
                             <li>
-                                <form action="/" method="post">
+                                <form action="{{ route('employeeSearch') }}" method="post">
                                     @csrf
                                     <button class="dropdown-item" type="submit">
                                         <input type="hidden" name="division_id" value="7">
@@ -88,7 +88,7 @@
                         </button>
                         <ul class="dropdown-menu b-2" aria-labelledby="dropdownMenu2">
                             <li>
-                                <form action="/" method="post">
+                                <form action="{{ route('employeeSearch') }}" method="post">
                                     @csrf
                                     <button class="dropdown-item" type="submit">
                                         <input type="hidden" name="division_id" value="8">
@@ -97,7 +97,7 @@
                                 </form>
                             </li>
                             <li>
-                                <form action="/" method="post">
+                                <form action="{{ route('employeeSearch') }}" method="post">
                                     @csrf
                                     <button class="dropdown-item" type="submit">
                                         <input type="hidden" name="division_id" value="9">
@@ -114,7 +114,7 @@
                         </button>
                         <ul class="dropdown-menu b-2" aria-labelledby="dropdownMenu2">
                             <li>
-                                <form action="/" method="post">
+                                <form action="{{ route('employeeSearch') }}" method="post">
                                     @csrf
                                     <button class="dropdown-item" type="submit">
                                         <input type="hidden" name="division_id" value="10"/>
@@ -123,7 +123,7 @@
                                 </form>
                             </li>
                             <li>
-                                <form action="/" method="post">
+                                <form action="{{ route('employeeSearch') }}" method="post">
                                     @csrf
                                     <button class="dropdown-item" type="submit">
                                         <input type="hidden" name="division_id" value="11">
@@ -136,12 +136,14 @@
                 </nav>
             </div>
         </div>
-        <div class="list w-25 bg-light shadow">
+        <div class="w-25 bg-light shadow">
             @foreach($users as $user)
-                <a href="{{route('showDetail', $user->id)}}" class="card text-decoration-none text-black">
+                <a href="{{route('showEmployeeDetail', $user->id)}}"
+                   class="card text-decoration-none text-black d-block rounded-0" style="height: fit-content">
                     <div class="d-flex">
                         <div class="img">
-                            <img src="{{ '\storage\images\ ' . $user->img_name }}" alt="...">
+                            <img src="{{ '\storage\images\ ' . $user->img_name }}" alt="..." class="rounded-0"
+                                 style="height: 50px">
                         </div>
                         <div class="content">
                             <span>{{ $user->nickname }}</span><br>

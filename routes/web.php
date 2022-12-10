@@ -3,26 +3,20 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\OwnerController;
-use App\Http\Controllers\HomeController;
 
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| contains the "web" middleware group. Now create something great!
-|
-*/
-Route::group(['prefix' => 'users', 'middleware' => 'auth'], function () {
-    Route::get('show/{id}', [UserController::class, 'show'])->name('users.show');
-    Route::get('edit/{id}', [UserController::class, 'edit'])->name('users.edit');
-    Route::post('show/{id}', [UserController::class, 'update'])->name('update');
+Route::get('/', [UserController::class, 'redirect'])->name('redirect');
+
+Route::prefix('employee')->middleware('auth')->group( function () {
+    Route::get('/list', [UserController::class, 'index'])->middleware('auth')->name('showEmployeeList');
+    Route::post('/list', [UserController::class, 'search'])->middleware('auth')->name('employeeSearch');
+    Route::get('/detail/{auth_id}', [UserController::class, 'showDetail'])->name('showEmployeeDetail');
+    Route::get('/edit/{auth_id}', [UserController::class, 'edit'])->name('showEmployeeEdit');
+    Route::post('/edit/success/{auth_id}', [UserController::class, 'update'])->name('employeeEdit');
 });
 
 Route::prefix('owner/users')->middleware('AdminMiddleware')->group( function () {
     Route::get('/list', [OwnerController::class, 'showUserList'])->name('showUserList');
+    Route::post('/list', [OwnerController::class, 'search'])->name('userSearch');
     Route::get('/detail/{user_id}', [OwnerController::class, 'showUserDetail'])->name('showUserDetail');
     Route::get('/create', [OwnerController::class, 'showUserCreate'])->name('showUserCreate');
     Route::post('/create/success', [OwnerController::class, 'create'])->name('userCreate');
@@ -31,15 +25,7 @@ Route::prefix('owner/users')->middleware('AdminMiddleware')->group( function () 
     Route::post('/delete/Success/{user_id}', [OwnerController::class, 'delete'])->name('userDelete');
 });
 
-
-
-//Route::get('/', function () {
-//    return view('top');
-//});
-
 Auth::routes();
 
-Route::get('/', [HomeController::class, 'index'])->middleware('auth')->name('home');
-Route::get('/detail/{user_id}', [HomeController::class, 'showDetail'])->middleware('auth')->name('showDetail');
-Route::post('/', [HomeController::class, 'search'])->middleware('auth')->name('search');
+
 

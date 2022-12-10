@@ -23,9 +23,12 @@ class User extends Authenticatable
         'password',
         'self_introduction',
         'img_name',
+        'gender_id',
         'kind_id',
-//        'img_name2',
-//        'img_name3',
+        'position_id',
+        'department_id',
+        'division_id',
+        'birthday',
     ];
 
     /**
@@ -47,18 +50,6 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-
-    //リレーション
-    public function birth()
-    {
-        return $this->belongsTo('App\Models\Birth');
-    }
-
-    public function birthday()
-    {
-        return $this->belongsTo('App\Models\Birthday');
-    }
-
     public function department()
     {
         return $this->belongsTo('App\Models\Department');
@@ -77,6 +68,11 @@ class User extends Authenticatable
     public function kind()
     {
         return $this->belongsTo('App\Models\Kind');
+    }
+
+    public function gender()
+    {
+        return $this->belongsTo('App\Models\Gender');
     }
 
     //検索機能
@@ -108,4 +104,27 @@ class User extends Authenticatable
 
         return $users;
     }
+
+    public static function searchUsers($gender_id, $keyword)
+    {
+
+        $query = User::query();
+
+        if (!empty($gender_id)) {
+            $query->whereHas('gender', function ($query) use ($gender_id) {
+                $query->where('id', $gender_id);
+            });
+        } else {
+            $query->with('gender');
+        }
+
+        if (!empty($keyword)) {
+            $query->where('name', 'like', "%$keyword%");
+        }
+
+        $users = $query->get();
+
+        return $users;
+    }
+
 }

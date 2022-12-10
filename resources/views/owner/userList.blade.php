@@ -1,16 +1,31 @@
 @extends('layouts.ownerDefault')
 
 @section('content')
-    <div class="w-75 m-auto">
-        <h1 class="h2 align-content-start w-25">ユーザ一覧</h1>
-        {{ $users->links() }}
+    <div class="container">
+        <form action="{{ route('userSearch') }}" method="post" class="input-group w-25 float-end">
+            @csrf
+            <select name="gender_id" class="form-control">
+                <option value="" selected>Gender</option>
+                @foreach($genders as $gender)
+                    <option value="{{ $gender->id }}">
+                        {{ $gender->name }}
+                    </option>
+                @endforeach
+            </select>
+            <input type="text" name="name" class="form-control input-group-prepend" placeholder="User Name">
+            <span class="input-group-btn input-group-append">
+                <button type="submit" id="btn-search" class="btn text-white rounded-0" style="background-color: #7bc890">検索</button>
+            </span>
+        </form>
+        {{--        {{ $users->links() }}--}}
         <table class="table m-auto">
             <tr>
                 <th>ID</th>
                 <td>name</td>
                 <td>email</td>
                 <td>kind</td>
-                <td></td>
+                <td>age</td>
+                <td>detail</td>
                 <td></td>
             </tr>
             @foreach($users as $user)
@@ -19,6 +34,7 @@
                     <td class="align-middle">{{ $user->name }}</td>
                     <td class="align-middle">{{ $user->email }}</td>
                     <td class="align-middle">{{ $user->kind->name }}</td>
+                    <td class="align-middle">{{ \Illuminate\Support\Carbon::parse($user->birthday)->age }}</td>
                     <td>
                         <button class="btn border">
                             <a href="{{ route('showUserDetail', $user->id) }}"
@@ -36,7 +52,7 @@
                 </tr>
             @endforeach
         </table>
-        <button class="btn border bg-primary">
+        <button class="btn border text-white mt-3" style="background-color: #7bc890">
             <a href="{{ route('showUserCreate') }}" class="text-white text-decoration-none">登録</a>
         </button>
     </div>

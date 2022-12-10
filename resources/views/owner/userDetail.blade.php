@@ -17,6 +17,10 @@
             <td>{{ $user->email }}</td>
         </tr>
         <tr>
+            <th>gender</th>
+            <td>{{ $user->gender->name }}</td>
+        </tr>
+        <tr>
             <th>kind</th>
             <td>{{ $user->kind->name }}</td>
         </tr>
@@ -54,7 +58,7 @@
             @endif
         </tr>
     </table>
-    <button class="btn border bg-primary">
+    <button class="btn border" style="background-color: #7bc890">
         <a href="{{ route('showUserEdit', $user->id) }}" class="text-white text-decoration-none">編集</a>
     </button>
         <button class="btn border bg-white">

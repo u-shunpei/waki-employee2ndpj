@@ -15,12 +15,11 @@ class DatabaseSeeder extends Seeder
     {
 
         $this->call([
-            BirthdaysTableSeeder::class,
-            BirthsTableSeeder::class,
             DepartmentsTableSeeder::class,
             DivisionsTableSeeder::class,
             PositionsTableSeeder::class,
             KindsTableSeeder::class,
+            GenderTableSeeder::class,
         ]);
 //        \App\Models\User::factory(10)->create();
     }
