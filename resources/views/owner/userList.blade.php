@@ -14,7 +14,8 @@
             </select>
             <input type="text" name="name" class="form-control input-group-prepend" placeholder="User Name">
             <span class="input-group-btn input-group-append">
-                <button type="submit" id="btn-search" class="btn text-white rounded-0" style="background-color: #7bc890">検索</button>
+                <button type="submit" id="btn-search" class="btn text-white rounded-0"
+                        style="background-color: #7bc890">検索</button>
             </span>
         </form>
         {{--        {{ $users->links() }}--}}
@@ -24,7 +25,22 @@
                 <td>name</td>
                 <td>email</td>
                 <td>kind</td>
-                <td>age</td>
+                <td>
+                    <span>age</span>
+                    <button class="btn dropdown-toggle" type="button" id="dropdownMenuButton1"
+                            data-bs-toggle="dropdown" aria-expanded="false">
+                    </button>
+                    <form action="{{ route('showUserList') }}" method="get" class="dropdown">
+                        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                            <li>
+                                <button type="submit" name="sort" value="asc" class="bg-white border-0">昇順</button>
+                            </li>
+                            <li>
+                                <button type="submit" name="sort" value="desc" class="bg-white border-0">降順</button>
+                            </li>
+                        </ul>
+                    </form>
+                </td>
                 <td>detail</td>
                 <td></td>
             </tr>

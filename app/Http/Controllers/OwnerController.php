@@ -19,10 +19,10 @@ class OwnerController extends Controller
 {
     const STATUS_PAGINATE = 10;
 
-    public function showUserList()
+    public function showUserList(Request $request)
     {
         $auth = Auth::user();
-        $users = User::all();
+        $users = User::order($request->sort);
         $genders = Gender::all();
 
         return view('owner.userList', compact('auth', 'users', 'genders'));

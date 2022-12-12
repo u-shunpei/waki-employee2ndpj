@@ -64,7 +64,7 @@
                     <tr>
                         <th>自己紹介</th>
                         <td>
-                            <textarea class="w-100" name="self_introduction" id="" cols="30" rows="5"></textarea>
+                            <textarea class="w-100" name="self_introduction" id="" cols="30" rows="5">{{ $user->self_introduction }}</textarea>
                         </td>
                     </tr>
                 </table>

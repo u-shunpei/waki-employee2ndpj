@@ -127,4 +127,15 @@ class User extends Authenticatable
         return $users;
     }
 
+    public static function order($select)
+    {
+        if($select === 'asc'){
+            return self::orderBy('birthday', 'asc')->get();
+        } elseif($select === 'desc') {
+            return self::orderBy('birthday', 'desc')->get();
+        } else {
+            return self::all();
+        }
+    }
+
 }
