@@ -39,7 +39,7 @@
                         </button>
                         <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
                             <li>
-                                <a class="dropdown-item" href="{{route('showEmployeeEdit', \Illuminate\Support\Facades\Auth::id())}}"><span>自分のプロフィールへ</span></a>
+                                <a class="dropdown-item" href="{{route('showEmployeeEdit', \Illuminate\Support\Facades\Auth::id())}}"><span>プロフィール編集</span></a>
                             </li>
                             <li>
                                 <div class='userAction_logout userAction_common'>

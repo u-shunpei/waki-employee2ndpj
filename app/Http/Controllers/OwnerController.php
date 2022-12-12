@@ -22,10 +22,12 @@ class OwnerController extends Controller
     public function showUserList(Request $request)
     {
         $auth = Auth::user();
-        $users = User::order($request->sort);
+
         $genders = Gender::all();
 
-        return view('owner.userList', compact('auth', 'users', 'genders'));
+        return view('owner.userList', ['auth' => $auth,
+            'users' => User::order($request->sort), User::searchUsers($request->name, $request->gender_id),
+            'genders' => $genders]);
     }
 
     public function showUserDetail($user_id)

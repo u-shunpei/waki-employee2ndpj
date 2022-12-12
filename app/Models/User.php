@@ -107,7 +107,6 @@ class User extends Authenticatable
 
     public static function searchUsers($gender_id, $keyword)
     {
-
         $query = User::query();
 
         if (!empty($gender_id)) {

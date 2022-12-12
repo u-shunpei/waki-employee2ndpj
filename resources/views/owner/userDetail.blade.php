@@ -26,11 +26,7 @@
         </tr>
         <tr>
             <th>birthday</th>
-            @if(!is_null($user->birth_id))
-                <td>{{ $user->birth->name }}月{{ $user->birthday->name }}日</td>
-            @else
-                <td></td>
-            @endif
+            <td>{{ $user->birthday }}</td>
         </tr>
         <tr>
             <th>position</th>

@@ -39,7 +39,7 @@
                         </button>
                         <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
                             <li><a class="dropdown-item"
-                                   href="{{route('showEmployeeEdit', \Illuminate\Support\Facades\Auth::id())}}"><span>自分のプロフィールへ</span></a>
+                                   href="{{route('showEmployeeEdit', \Illuminate\Support\Facades\Auth::id())}}"><span>プロフィール編集</span></a>
                             </li>
                             <li>
                                 <div class='userAction_logout userAction_common'>
@@ -55,8 +55,7 @@
                     </div>
                 </li>
             </ul>
-            <form action="{{ route('employeeSearch') }}" method="post" class="d-flex w-25" style="height: 40px">
-                @csrf
+            <form action="{{ route('employeeSearch') }}" method="get" class="d-flex w-25" style="height: 40px">
                 <input type="text" name="name" class="form-control input-group-prepend rounded-0" placeholder="Name">
                 <button type="submit" id="btn-search" class="btn text-white bg-success rounded-0 text-nowrap">検索</button>
             </form>

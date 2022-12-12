@@ -2,8 +2,7 @@
 
 @section('content')
     <div class="container">
-        <form action="{{ route('userSearch') }}" method="post" class="input-group w-25 float-end">
-            @csrf
+        <form action="{{ route('userSearch') }}" method="get" class="input-group w-25 float-end">
             <select name="gender_id" class="form-control">
                 <option value="" selected>Gender</option>
                 @foreach($genders as $gender)
