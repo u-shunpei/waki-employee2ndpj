@@ -33,6 +33,9 @@
                     <form action="{{ route('showUserList') }}" method="get" class="dropdown">
                         <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
                             <li>
+                                <button type="submit" name="sort" value="" class="bg-white border-0">元に戻す</button>
+                            </li>
+                            <li>
                                 <button type="submit" name="sort" value="asc" class="bg-white border-0">昇順</button>
                             </li>
                             <li>
