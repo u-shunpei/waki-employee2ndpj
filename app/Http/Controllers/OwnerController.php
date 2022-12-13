@@ -13,6 +13,7 @@ use App\Services\FileUploadServices;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Response;
 use Intervention\Image\Facades\Image;
 
 class OwnerController extends Controller
@@ -22,12 +23,10 @@ class OwnerController extends Controller
     public function showUserList(Request $request)
     {
         $auth = Auth::user();
-
         $genders = Gender::all();
+        $users = User::order($request->sort);
 
-        return view('owner.userList', ['auth' => $auth,
-            'users' => User::order($request->sort), User::searchUsers($request->name, $request->gender_id),
-            'genders' => $genders]);
+        return view('owner.userList', compact('auth', 'genders', 'users'));
     }
 
     public function showUserDetail($user_id)
@@ -138,5 +137,37 @@ class OwnerController extends Controller
         $genders = Gender::all();
         $auth = Auth::user();
         return view('owner.userList', compact('users','auth', 'genders'));
+    }
+
+    public function download()
+    {
+        $users = User::all();
+        $stream = fopen('php://temp', 'w');   //ストリームを書き込みモードで開く
+        $arr = array('id', 'name', 'email', '種別', '生年月日');           //CSVファイルのカラム（列）名の指定
+
+        fputcsv($stream, $arr);               //1行目にカラム（列）名のみを書き込む（繰り返し処理には入れない）
+        foreach ($users as $user) {
+            $arrInfo = array(
+                'id' => $user->id,
+                'name' => $user->name,
+                'email' => $user->email,
+                '種別' => $user->kind->name,
+                '生年月日' => $user->birthday,
+            );
+            fputcsv($stream, $arrInfo);       //DBの値を繰り返し書き込む
+        }
+
+        rewind($stream);                      //ファイルポインタを先頭に戻す
+        $csv = stream_get_contents($stream);  //ストリームを変数に格納
+        $csv = mb_convert_encoding($csv, 'sjis-win', 'UTF-8');   //文字コードを変換
+
+        fclose($stream);                      //ストリームを閉じる
+
+        $headers = array(                     //ヘッダー情報を指定する
+            'Content-Type' => 'text/csv',
+            'Content-Disposition' => 'attachment; filename=test.csv'
+        );
+
+        return Response::make($csv, 200, $headers);   //ファイルをダウンロードする
     }
 }

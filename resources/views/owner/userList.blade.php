@@ -6,7 +6,7 @@
             <select name="gender_id" class="form-control">
                 <option value="" selected>Gender</option>
                 @foreach($genders as $gender)
-                    <option value="{{ $gender->id }}">
+                    <option value="{{ $gender->id }}" name="gender_id">
                         {{ $gender->name }}
                     </option>
                 @endforeach
@@ -17,7 +17,6 @@
                         style="background-color: #7bc890">検索</button>
             </span>
         </form>
-        {{--        {{ $users->links() }}--}}
         <table class="table m-auto">
             <tr>
                 <th>ID</th>
@@ -70,9 +69,15 @@
                 </tr>
             @endforeach
         </table>
-        <button class="btn border text-white mt-3" style="background-color: #7bc890">
-            <a href="{{ route('showUserCreate') }}" class="text-white text-decoration-none">登録</a>
-        </button>
+        <form action="{{ route('download') }}" method="POST">
+            <button type="button" class="btn border text-white mt-3" style="background-color: #7bc890">
+                <a href="{{ route('showUserCreate') }}" class="text-white text-decoration-none">登録</a>
+            </button>
+            @csrf
+            <button type="submit" class="btn border mt-3">
+                CSV出力
+            </button>
+        </form>
     </div>
 @endsection
 <script src="{{ asset('js/delete.js') }}"></script>

@@ -23,6 +23,7 @@ Route::prefix('owner/users')->middleware('AdminMiddleware')->group( function () 
     Route::get('/edit/{user_id}', [OwnerController::class, 'showUserEdit'])->name('showUserEdit');
     Route::post('/edit/success/{user_id}', [OwnerController::class, 'edit'])->name('userEdit');
     Route::post('/delete/Success/{user_id}', [OwnerController::class, 'delete'])->name('userDelete');
+    Route::post('/download', [OwnerController::class, 'download'])->name('download');
 });
 
 Auth::routes();
