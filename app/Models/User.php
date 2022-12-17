@@ -106,7 +106,7 @@ class User extends Authenticatable
         return $users;
     }
 
-    public static function searchUsers($gender_id, $keyword)
+    public static function searchUsers($gender_id, $keyword, $select)
     {
         $query = User::query();
 
@@ -122,6 +122,14 @@ class User extends Authenticatable
             $query->where('name', 'like', "%$keyword%");
         }
 
+        if($select === 'asc'){
+            $query->orderBy('birthday', 'asc');
+        } elseif($select === 'desc') {
+            $query->orderBy('birthday', 'desc');
+        } else {
+            $query->orderBy('id', 'asc');
+        }
+
         $users = $query->get();
 
         return $users;
@@ -129,12 +137,6 @@ class User extends Authenticatable
 
     public static function order($select)
     {
-        if($select === 'asc'){
-            return self::orderBy('birthday', 'asc')->get();
-        } elseif($select === 'desc') {
-            return self::orderBy('birthday', 'desc')->get();
-        } else {
-            return self::all();
-        }
+
     }
 }

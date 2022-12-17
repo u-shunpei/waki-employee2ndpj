@@ -16,7 +16,6 @@ Route::prefix('employee')->middleware('auth')->group( function () {
 
 Route::prefix('owner/users')->middleware('AdminMiddleware')->group( function () {
     Route::get('/list', [OwnerController::class, 'showUserList'])->name('showUserList');
-    Route::get('/list/search', [OwnerController::class, 'search'])->name('userSearch');
     Route::get('/detail/{user_id}', [OwnerController::class, 'showUserDetail'])->name('showUserDetail');
     Route::get('/create', [OwnerController::class, 'showUserCreate'])->name('showUserCreate');
     Route::post('/create/success', [OwnerController::class, 'create'])->name('userCreate');

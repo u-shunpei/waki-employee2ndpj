@@ -180,6 +180,10 @@
                 <div class="">
                     <table class="table table-striped">
                         <tr>
+                            <th>閲覧数</th>
+                            <td>{{ $count }}</td>
+                        </tr>
+                        <tr>
                             <th>自己紹介</th>
                             <td>{{ $person->self_introduction }}</td>
                         </tr>

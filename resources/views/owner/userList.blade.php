@@ -2,8 +2,8 @@
 
 @section('content')
     <div class="container">
-        <form action="{{ route('userSearch') }}" method="get" class="input-group w-25 float-end">
-            <select name="gender_id" class="form-control">
+        <form action="{{ route('showUserList') }}" method="get" class="input-group w-25 float-end">
+            <select name="gender_id" class="form-control rounded-0">
                 <option value="" selected>Gender</option>
                 @foreach($genders as $gender)
                     <option value="{{ $gender->id }}" name="gender_id">
@@ -75,7 +75,7 @@
             </button>
             @csrf
             <button type="submit" class="btn border mt-3">
-                CSV出力
+                エクスポート
             </button>
         </form>
     </div>

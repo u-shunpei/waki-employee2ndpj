@@ -7,6 +7,7 @@ use App\Models\Department;
 use App\Models\Division;
 use App\Models\Position;
 use App\Models\User;
+use http\Params;
 use Illuminate\Http\Request;
 use App\Services\FileUploadServices;
 use App\Services\CheckExtensionServices;
@@ -28,7 +29,7 @@ class UserController extends Controller
         return view('users.list', compact('users', 'auth'));
     }
 
-    public function showDetail($user_id)
+    public function showDetail($user_id, $file_name = "counter.dat")
     {
         $users = User::all();
         $person = User::findorFail($user_id);
@@ -37,7 +38,25 @@ class UserController extends Controller
         }
         $auth = Auth::user();
 
-        return view('users.detail', compact('person', 'auth', 'users'));
+        if (file_exists($file_name)) {
+
+            $handle = fopen($file_name, "r");
+            $count = (int)fread($handle, 20) + 1;
+
+            $handle = fopen($file_name, 'w');
+            fwrite($handle, $count);
+
+            fclose($handle);
+        } else {
+            $handle = fopen($file_name , "w+");
+
+            $count = 1;
+
+            fwrite($handle, $count);
+            fclose($handle);
+        }
+
+        return view('users.detail', compact('person', 'auth', 'users', 'count'));
     }
 
     public function search(Request $request)
@@ -88,9 +107,6 @@ class UserController extends Controller
         $users->self_introduction = $request->self_introduction;
 
         $users->save();
-
-
-
 
         return view('users.editSuccess', compact('user', 'auth'));
     }

@@ -24,7 +24,7 @@ class OwnerController extends Controller
     {
         $auth = Auth::user();
         $genders = Gender::all();
-        $users = User::order($request->sort);
+        $users = User::searchUsers($request->gender_id, $request->name, $request->sort);
 
         return view('owner.userList', compact('auth', 'genders', 'users'));
     }
@@ -131,26 +131,18 @@ class OwnerController extends Controller
         return view('owner.userDeleteSuccess', compact('user', 'auth'));
     }
 
-    public function search(Request $request)
-    {
-        $users = User::searchUsers($request->name, $request->gender_id);
-        $genders = Gender::all();
-        $auth = Auth::user();
-        return view('owner.userList', compact('users','auth', 'genders'));
-    }
-
     public function download()
     {
         $users = User::all();
         $stream = fopen('php://temp', 'w');   //ストリームを書き込みモードで開く
-        $arr = array('id', 'name', 'email', '種別', '生年月日');           //CSVファイルのカラム（列）名の指定
+        $arr = array('ユーザID', '氏名', 'メールアドレス', '種別', '生年月日');           //CSVファイルのカラム（列）名の指定
 
         fputcsv($stream, $arr);               //1行目にカラム（列）名のみを書き込む（繰り返し処理には入れない）
         foreach ($users as $user) {
             $arrInfo = array(
-                'id' => $user->id,
-                'name' => $user->name,
-                'email' => $user->email,
+                'ユーザID' => $user->id,
+                '氏名' => $user->name,
+                'メールアドレス' => $user->email,
                 '種別' => $user->kind->name,
                 '生年月日' => $user->birthday,
             );
