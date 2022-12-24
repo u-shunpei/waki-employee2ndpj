@@ -4,7 +4,7 @@
     <div class="signupPage">
         <div class="w-75 m-auto">
             <h2>ユーザ詳細</h2>
-            <form action="{{ route('employeeEdit', \Illuminate\Support\Facades\Auth::id()) }}" method="POST">
+            <form action="{{ route('employeeEdit', \Illuminate\Support\Facades\Auth::id()) }}" method="POST" enctype="multipart/form-data">
                 @csrf
                 <table class="table">
                     <tr>

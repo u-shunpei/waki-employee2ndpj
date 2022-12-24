@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\ProfileRequest;
+use App\Models\Counter;
 use App\Models\Department;
 use App\Models\Division;
 use App\Models\Position;
@@ -29,7 +30,7 @@ class UserController extends Controller
         return view('users.list', compact('users', 'auth'));
     }
 
-    public function showDetail($user_id, $file_name = "counter.dat")
+    public function showDetail($user_id)
     {
         $users = User::all();
         $person = User::findorFail($user_id);
@@ -37,26 +38,12 @@ class UserController extends Controller
             return 'エラー';
         }
         $auth = Auth::user();
+        $counter = Counter::create([
+            'user_id' => $user_id,
+        ]);
+        $count = Counter::where('user_id', $user_id)->count();
 
-        if (file_exists($file_name)) {
-
-            $handle = fopen($file_name, "r");
-            $count = (int)fread($handle, 20) + 1;
-
-            $handle = fopen($file_name, 'w');
-            fwrite($handle, $count);
-
-            fclose($handle);
-        } else {
-            $handle = fopen($file_name , "w+");
-
-            $count = 1;
-
-            fwrite($handle, $count);
-            fclose($handle);
-        }
-
-        return view('users.detail', compact('person', 'auth', 'users', 'count'));
+        return view('users.detail', compact('person', 'auth', 'users', 'counter', 'count'));
     }
 
     public function search(Request $request)

@@ -76,6 +76,11 @@ class User extends Authenticatable
         return $this->belongsTo('App\Models\Gender');
     }
 
+    public function counters()
+    {
+        return $this->hasMany('App\Counter');
+    }
+
     //検索機能
     public static function searchShops($department_id, $division_id, $keyword)
     {
@@ -133,10 +138,5 @@ class User extends Authenticatable
         $users = $query->get();
 
         return $users;
-    }
-
-    public static function order($select)
-    {
-
     }
 }

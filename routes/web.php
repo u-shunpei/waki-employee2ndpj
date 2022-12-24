@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\OwnerController;
+use App\Http\Controllers\LoginWithGoogleController;
 
 Route::get('/', [UserController::class, 'redirect'])->name('redirect');
 
@@ -24,6 +25,14 @@ Route::prefix('owner/users')->middleware('AdminMiddleware')->group( function () 
     Route::post('/delete/Success/{user_id}', [OwnerController::class, 'delete'])->name('userDelete');
     Route::post('/download', [OwnerController::class, 'download'])->name('download');
 });
+
+Route::prefix('auth/google')->group( function () {
+    Route::get('/', [LoginWithGoogleController::class, 'redirectToGoogle'])->name('redirectToGoogle');
+    Route::get('/callback', [LoginWithGoogleController::class, 'handleGoogleCallback'])->name('handleGoogleCallback');
+    Route::get('/edit{user_id}', [LoginWithGoogleController::class, 'showGoogleUserCreate'])->name('showGoogleUserCreate');
+    Route::post('/edit/success/{user_id}', [LoginWithGoogleController::class, 'create'])->name('googleUserCreate');
+});
+
 
 Auth::routes();
 

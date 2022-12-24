@@ -1,3 +1,33 @@
+Skip to content
+Search or jump to…
+Pull requests
+Issues
+Codespaces
+Marketplace
+Explore
+
+@u-shunpei
+u-shunpei
+/
+waki-employee2ndpj
+Public
+Code
+Issues
+Pull requests
+Actions
+Projects
+Wiki
+Security
+Insights
+Settings
+waki-employee2ndpj/config/auth.php /
+@u-shunpei
+u-shunpei 詳細画面
+Latest commit 64a4f7d on Nov 7
+History
+1 contributor
+111 lines (98 sloc)  3.58 KB
+
 <?php
 
 return [
@@ -36,7 +66,7 @@ return [
     */
 
     'guards' => [
-        'users' => [
+        'web' => [
             'driver' => 'session',
             'provider' => 'users',
         ],
